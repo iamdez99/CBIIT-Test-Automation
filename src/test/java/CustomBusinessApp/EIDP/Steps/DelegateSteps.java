@@ -19,7 +19,7 @@ public class DelegateSteps extends PageInitializer {
 
 	@When("User select delegation type as \"([^\"]*)\"")
 	public void selectDelegationtype(String type) throws Exception {
-		if ("temporary".equalsIgnoreCase(type)) {
+		if("temporary".equalsIgnoreCase(type)) {
 			delegatePage.selectDelegationType(DelegationTypes.TEMPORARY);
 		} else if ("Permanent".equalsIgnoreCase(type)) {
 			delegatePage.selectDelegationType(DelegationTypes.PERMANENT);
@@ -33,13 +33,13 @@ public class DelegateSteps extends PageInitializer {
 	public void addNewDelegate(DataTable data) {
 		Map<String, String> map = CommonUtil.getMapFromDataTable(data);
 		delegatePage.selectName(map.get("Name"));
-		if (map.get("Start Date") != "" && map.get("Start Date") != null) {
+		if(map.get("Start Date") != "" && map.get("Start Date") != null) {
 			delegatePage.selectStartDate(map.get("Start Date"));
 		}
-		if (map.get("End Date") != "" && map.get("End Date") != null) {
+		if(map.get("End Date") != "" && map.get("End Date") != null) {
 			delegatePage.selectEndDate(map.get("End Date"));
 			delegatePage.clickOnAddbutton();
-		} else {
+		}else {
 			delegatePage.clickOnPermanentDelegateAddButton();
 		}
 		CommonUtil.waitBrowser(4000);

@@ -34,6 +34,7 @@ public class GeneralInformationSteps extends PageInitializer {
 			generalInformationStepImpl.selectCoPrimaryMentor(coPrimaryMentor);
 		} else {
 			generalInformationStepImpl.doYouHaveCoPrimaryMentory(false);
+			MiscUtils.sleep(3000);
 		}
 		
 		try {
@@ -41,8 +42,9 @@ public class GeneralInformationSteps extends PageInitializer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		MiscUtils.sleep(3000);
 		generalInformationStepImpl.selectRandomHighestDegree();
-		CommonUtil.waitBrowser(2000);
+		MiscUtils.sleep(3000);
 		CucumberLogUtils.logScreenShot("General Info");
 		generalInformationStepImpl.clickOnSaveAndContinueButton();
 	}

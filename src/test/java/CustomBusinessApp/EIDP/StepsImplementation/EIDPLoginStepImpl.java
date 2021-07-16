@@ -19,7 +19,7 @@ public class EIDPLoginStepImpl extends PageInitializer {
 		WebDriverUtils.webDriver.get(EnvUtils.getApplicationUrl("EidpUrlNHGRI"));
 		CommonUtils.sendKeys(nihLoginPage.username, ConfUtils.getProperty(username));
 		String decyptedPass = EncryptionUtils.decrypt(ConfUtils.getProperty(password));
-		CommonUtils.sendKeys(nihLoginPage.password, decyptedPass);
+	    CommonUtils.sendKeys(nihLoginPage.password, decyptedPass);
 		CommonUtils.click(nihLoginPage.signInButton);
 		MiscUtils.sleep(3000);
 	}

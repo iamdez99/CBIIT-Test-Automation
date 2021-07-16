@@ -17,7 +17,7 @@ public class VacancyManagerUserPage extends CommonUtils {
 	public WebElement vacancyDashboardPageHeader;
 
 	/** Create Vacancy Button **/
-	@FindBy(xpath = "//button[@class='ant-btn ant-btn-primary']")
+	@FindBy(xpath = "//button[@class='ant-btn ant-btn-primary CreateVacancyButton']")
 	public WebElement createVacancyButton;
 
 	/** Vacancy Page Vacancy Title Input Field **/
@@ -32,17 +32,29 @@ public class VacancyManagerUserPage extends CommonUtils {
 	@FindBy(xpath = "//h3[contains(text(),'Basic Vacancy Information')]")
 	public WebElement vacancyHeader;
 
-	/** Recommendation Option **/
-	@FindBy(xpath = "//div[@class='ant-slider-step']")
-	public WebElement lettersOfRecommendation;
+	/** Recommendation Option Slider **/
+	@FindBy(css = "div.ant-slider-handle")
+	public WebElement recommendationLetterSlider;
 
 	/** Basic Vacancy Information Save Button **/
 	@FindBy(xpath = "//button[@class='ant-btn ant-btn-primary wider-button']")
 	public WebElement basicVacancyInformationSaveButton;
-
-	/** Review and Finalize Page verify number of letters of recommendation **/
+	
+	/** Review and Finalize Page verify number of letters of recommendation 0 **/
+	@FindBy(xpath = "//li[@class='ListItemTrue' and text()='0']")
+	public WebElement numberOfLettersOfRecommendation0;
+	
+	/** Review and Finalize Page verify number of letters of recommendation 1 **/
+	@FindBy(xpath = "//li[@class='ListItemTrue' and text()='1']")
+	public WebElement numberOfLettersOfRecommendation1;
+	
+	/** Review and Finalize Page verify number of letters of recommendation 2 **/
 	@FindBy(xpath = "//li[@class='ListItemTrue' and text()='2']")
-	public WebElement numberOfLettersOfRecommendation;
+	public WebElement numberOfLettersOfRecommendation2;
+
+	/** Review and Finalize Page verify number of letters of recommendation 3**/
+	@FindBy(xpath = "//li[@class='ListItemTrue' and text()='3']")
+	public WebElement numberOfLettersOfRecommendation3;
 
 	/** List of Vacancy Sections **/
 	@FindBy(css = "div.ant-steps-item")
@@ -146,27 +158,23 @@ public class VacancyManagerUserPage extends CommonUtils {
 
 	/** Basic Vacancy tab closed vacancies ALL sub filters **/
 	@FindBy(xpath = "(//span[contains(text(), 'All')])[3]")
-	public WebElement allClosedSubFiltersTextpreFlightVacanciesTab;
+	public WebElement closedAllSubFiltersTextpreFlightVacanciesTab;
 
 	/** Basic Vacancy tab closed vacancies Closed sub filters **/
-	@FindBy(xpath = "//span[contains(text(), 'Closed')]")
-	public WebElement closedClosedSubFiltersTextpreFlightVacanciesTab;
+	@FindBy(xpath = "//span[contains(text(), 'Committee Review')]")
+	public WebElement closedCommitteeReviewSubFiltersTextpreFlightVacanciesTab;
 
 	/** Basic Vacancy tab closed vacancies Triaged sub filters **/
 	@FindBy(xpath = "//span[contains(text(), 'Triaged')]")
-	public WebElement triagedClosedSubFiltersTextpreFlightVacanciesTab;
+	public WebElement closedTriagedSubFiltersTextpreFlightVacanciesTab;
 
 	/** Basic Vacancy tab closed vacancies Individually Scored sub filters **/
-	@FindBy(xpath = "//span[contains(text(), 'Individually Scored')]")
-	public WebElement individuallyScoredClosedSubFiltersTextpreFlightVacanciesTab;
+	@FindBy(xpath = "//span[contains(text(), 'Individual Scored')]")
+	public WebElement closedIndividuallyScoredSubFiltersTextpreFlightVacanciesTab;
 
 	/** Basic Vacancy tab closed vacancies Scored sub filters **/
-	@FindBy(xpath = "(//span[contains(text(), 'Scored')])[2]")
-	public WebElement scoredClosedSubFiltersTextpreFlightVacanciesTab;
-
-	/** Basic Vacancy tab closed vacancies Archived sub filters **/
-	@FindBy(xpath = "//span[contains(text(), 'Archived')]")
-	public WebElement archivedClosedSubFiltersTextpreFlightVacanciesTab;
+	@FindBy(xpath = "//span[contains(text(), 'Voting Complete')]")
+	public WebElement closedVotingCompleteSubFiltersTextpreFlightVacanciesTab;
 
 	/** Basic Vacancy Open Date calendar input **/
 	@FindBy(xpath = "//input[@id='BasicInfo_openDate']")
@@ -181,11 +189,11 @@ public class VacancyManagerUserPage extends CommonUtils {
 	public WebElement date;
 
 	/** Basic Vacancy Open Date calendar table **/
-	@FindBy(xpath = "(//table[@class='ant-picker-content'])[1]")
+	@FindBy(xpath = "//input[@id='BasicInfo_openDate']")
 	public WebElement openCalendarTableInBasicVacancySection;
 
 	/** Basic Vacancy Close Date calendar table **/
-	@FindBy(xpath = "(//table[@class='ant-picker-content'])[2]")
+	@FindBy(xpath = "//input[@id='BasicInfo_closeDate']")
 	public WebElement closeCalendarTableInBasicVacancySection;
 
 	/** Basic Vacancy Today's OpenDate calendar table **/
@@ -282,14 +290,6 @@ public class VacancyManagerUserPage extends CommonUtils {
 	@FindBy(xpath= "//p[contains(text(), 'Application submitted confirmation')]")
 	public WebElement applicationSubmittedConfirmationField;
 	
-	/**Not referred to interview Field**/
-	@FindBy(xpath= "//p[contains(text(), 'Not referred to interview')]")
-	public WebElement notReferredToInterviewField;
-	
-	/**Not referred to interview Field**/
-	@FindBy(xpath= "//p[contains(text(), 'Invitation to interview')]")
-	public WebElement invitationToInterviewField;
-	
 	/** Application Saved Toggle Button**/
 	@FindBy(xpath= "//button[@id='EmailTemplates_emailTemplates_0_active']")
 	public WebElement applicationSavedToggleButton;
@@ -337,12 +337,12 @@ public class VacancyManagerUserPage extends CommonUtils {
 	
 	
 	/**APPTRACK SCORING MEMBER**/
-	@FindBy(xpath="//*[contains (text(), 'APPTRACK SCORING MEMBER')]")
-	public WebElement apptrackScoringMember;
+	@FindBy(xpath="//*//*[contains (text(), 'Connor Scoring')]")
+	public WebElement connorScoringMember;
 	
 	/**APPTRACK COMMITTEE MEMBER**/
-	@FindBy(xpath="//*[contains (text(), 'APPTRACK COMMITTEE MEMBER')]")
-	public WebElement apptrackCommitteeMember;
+	@FindBy(xpath="//*[contains (text(), 'Abdullah Sharif')]")
+	public WebElement abdullahSharifMember;
 	
 	/**APPTRACK COMMITTEE MEMBER**/
 	@FindBy(xpath="//*[contains (text(), 'APPTRACK VACANCY MANAGER')]")
@@ -376,6 +376,31 @@ public class VacancyManagerUserPage extends CommonUtils {
 	/**Calendar DatePicker**/
 	@FindBy(xpath ="//div[@class='ant-picker-cell-inner']")
 	public List<WebElement> calendarDatePicker;
+	
+	/**Vacancy dashboard tab**/
+	@FindBy(xpath = "//li[@class='ant-menu-item ant-menu-item-only-child']//*[contains(text(), 'Vacancy Dashboard')]")
+	public WebElement vacanciesDashboardTab;
+	
+	/**Home Page Header**/
+	@FindBy(xpath = "//h1[contains(text(),'Senior Scientific Careers at NCI')]")
+	public WebElement homePageHeader;
+	
+	/**Review and Finalize Tab Alert Message OK button**/
+	@FindBy(xpath ="//*[contains (text(), 'OK')]")
+	public WebElement reviewOKbutton;
+	
+	/**Review and Finalize  Alert Message 'Ready To Finalize?'**/
+	@FindBy(xpath ="//div[@class='ant-modal-body']//h2")
+	public WebElement readyToFinalizeMessage;
+	
+	/**Vacancy Finalized  Alert Message 'Ready To Finalize?'**/
+	@FindBy(xpath ="//div[@class='ant-modal-body']//h2")
+	public WebElement vacancyFinalizedMessage;
+	
+	/**Vacancy Finalized  Close Alert'**/
+	@FindBy(xpath ="//button[@class='ant-btn ant-btn-primary ant-btn-background-ghost']/span")
+	public WebElement closeAlertMessage;
+	
 	
 	
 	public VacancyManagerUserPage() {

@@ -5,7 +5,8 @@ Given User is on AppTracker home page and user is "AppTracker Vacancy Manager"
 
 @Regression @Ticket88
 Scenario: verify vacancy description without copy/paste
-And User should see Vacancy Dashboard Page
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
 And User enters the vacancy title
 Then User should see "Basic Vacancy Information" text as
@@ -17,53 +18,64 @@ Then User should see "Basic Vacancy Information" text as
 •	Obtains product market share by working with sales director to develop product sales strategies.
 •	Assesses product market data by calling on customers with field salespeople and evaluating sales call results.
 
-
  """
  
-@Satya3Ticket89 @Regression
-Scenario: Verify Letters of Recommendation persistent in Basic Information 
+@Ticket89-1 @Regression
+Scenario: Verify Letters of Recommendation persistent in Basic Information
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab 
 When User clicks on Create Vacancy button
-And User selects recommendation as 2
-And User clicks Save button
-Then User can verify the recommendation value showing as 2 on Review and Finalize page
+And User enters the vacancy title
+Then User selects recommendation as 2 
 
 
 
-@Satya4Ticket91
+
+
+@Ticket91
 Scenario: Verify create vacancy form
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab 
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 And User can see the Create Vacancy form opens with below left menu items
 | Basic Vacancy Information |
 | Mandatory Statements      |
 | Vacancy Committee         |
-| Email Templates  |
-| Review and Finalize |
+| Email Templates           |
+| Review and Finalize       |
 And User click on "Vacancy Committee" without entering any value in previous field
 Then User should able to navigate to the "Basic Vacancy Information" without any error
 
 
-@Satya5Ticket93
+@Ticket93
 Scenario: Verify the Vacancy Manager dashboard landing page
-And User should see Vacancy Dashboard Page
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab
 And User can see the dashboard page displaying tabs as below 
-|pre-flight vacancies|live vacancies|closed vacancies    |
+|pre-flight vacancies|live vacancies|closed vacancies|
 Then User can see count of each tabs
 
 
 		
-@Satya6Ticket93
+@Ticket93-1
 Scenario: Verify dashboard page sub filters
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab
 When User clicks on live vacancies tab
 And User can see the "All", "Live", "Extended" sub filters on live vacancies
 When User is on pre-flight vacancies tab
 And User can see the "All", "Draft", "Finalized" sub filters on pre-flight vacancies tab
 When User clicks on closed vacancies tab
-Then User can see the "All", "Closed", "Triaged", "Individually Scored", "Scored", "Archived" sub filters on closed vacancies
+Then User can see the "All", "Triaged", "Individual Scored", "Committee Review", "Voting Complete" sub filters on closed vacancies
 
 
 @Satya7Ticket94
 Scenario: Verify set vacancy date functionality
+And User should see Vacancy Manager Home Page
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 Then User should able to navigate to the "Basic Vacancy Information" without any error
 And User clicks on the Open date field to see calendar past dates disabled
 And User clicks on the Close Date field to see calendar past dates disabled
@@ -79,17 +91,20 @@ When User comes back to Basic information tab
 Then User can see the selected Open & Closed date displaying as the same
 
 
-
 @Satya10Ticket101 
 Scenario: Verify the Mandatory Statements Page
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 And User clicks on the Mandatory Statements section
-Then User can see "Equal Opportunity Employer","Standards of Conduct/Financial Disclosure", "Foreign Education", "Reasonable Accommodation" toggle buttons
+Then User can verify "Equal Opportunity Employer","Standards of Conduct/Financial Disclosure", "Foreign Education", "Reasonable Accommodation" toggle buttons
 And User can see pre-filled rich text area on each of the field
 
 @Satya11Ticket101
 Scenario Outline: Verify the on/off for the buttons in the mandatory statements
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 And User clicks on the Mandatory Statements section
 And User toggles off "<buttons>" as below
 Examples: buttons
@@ -99,7 +114,9 @@ Examples: buttons
 
 @Satya12Ticket101
 Scenario: Verify the Mandatory Statements persistence on editing text
+And User clicks on vacancy dashboard tab
 And User clicks on Create Vacancy button
+And User enters the vacancy title
 And User clicks on the Mandatory Statements section
 And User edits Equal Opportunity Employer text by adding "This position requires traveling overseas"
 And User toggles off/on Equal Opportunity Employer button
@@ -108,8 +125,9 @@ Then User can see the updated value displays in the text field
 
 @Satya13Ticket102
 Scenario: Verify create vacancy documents upload functionality
-And User should see Vacancy Dashboard Page
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 Then User can see the below fields under Application Documents "Curriculum Vitae (CV)","Cover Letter", "Vision Statement", "Qualification Statement"
 And User can see Add more button to add more documents
 And User can see optional check box in each field to indicate the document is optional 
@@ -117,8 +135,9 @@ And User can see trash icon in each field to delete the field
 
 @Satya14Ticket102
 Scenario:Verify the rename & persistence of functionality in documents section
-And User should see Vacancy Dashboard Page
-And User clicks on Create Vacancy button
+And User clicks on vacancy dashboard tab
+When User clicks on Create Vacancy button
+And User enters the vacancy title
 And User deletes one existing document section
 And User renames any field in the Application Documents section and User adds more documents
 And User clicks on the Mandatory Statements section
@@ -127,9 +146,11 @@ Then User can see changes in documents section remains the same
 
 @Satya15Ticket103
 Scenario: Verify the email template in create vacancy form
-And User clicks on Create Vacancy button
+And User clicks on vacancy dashboard tab
+When User clicks on Create Vacancy button
+And User enters the vacancy title
 When User clicks on the Email Template tab
-And User can see the below fields "Application saved","Application is inactive","Application submitted confirmation", "Not referred to interview","Invitation to interview"
+And User can see the below fields "Application saved","Application is inactive","Application submitted confirmation"
 When User toggles off/on Application saved checkbox to mark the template as active or not
 And User inputs in Application saved email template text "Lorem Ipsum"
 And User clicks on Vacancy Committee tab
@@ -138,8 +159,9 @@ Then User can see the updated changes displaying as same
 
 @Satya16Ticket119
 Scenario: Verify Vacancy Committee form
-Given User logged in to the application with vacancy manager user role
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
+And User enters the vacancy title
 And User clicks on Vacancy Committee tab
 And User can see the Vacancy Committee table and add member button
 And User clicks on the add member button
@@ -199,6 +221,7 @@ And User clicks on the Email template tab
 
 @Satya18Ticket120
 Scenario: Verify the Review & Finalize screen with positive input
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
 And User enters the vacancy title
 Then User should see "Basic Vacancy Information" text as
@@ -210,17 +233,20 @@ Then User should see "Basic Vacancy Information" text as
 •	Obtains product market share by working with sales director to develop product sales strategies.
 •	Assesses product market data by calling on customers with field salespeople and evaluating sales call results.
  """
-And User picks open date as "2021-06-10" and close date as "2021-06-22"
+And User clicks on the Open date field to see calendar past dates disabled
+And User clicks on the Close Date field to see calendar past dates disabled
+And User picks open date and close date
+Then User selects recommendation as 2
 And User clicks on Vacancy Committee tab
-And User adds committee member as "APPTRACK COMMITTEE MEMBER" and role "Chair"
-And User adds committee member as "APPTRACK SCORING MEMBER" and role "Executive Secretary"
+And User adds committee member as "Abdullah Sharif" and role "Chair"
+And User adds committee member as "Connor Scoring" and role "Executive Secretary"
 And User clicks on Review and Finalize tab
 And User clicks on the Mandatory Statements section
 And User clicks on Review and Finalize tab
 When User clicks on Save and Finalize button
-Then User can see confirmation modal "Ready to finalize vacancy?" is displayed
-When User chooses OK for  confirmation modal"Ready to finalize vacancy?"
-Then User can see confirmation modal "Vacancy Finalized!"
+Then User can see confirmation modal appear
+When User chooses OK for confirmation modal"Ready to finalize vacancy?"
+Then User can see confirmation modal Vacancy Finalized!
 
 
 

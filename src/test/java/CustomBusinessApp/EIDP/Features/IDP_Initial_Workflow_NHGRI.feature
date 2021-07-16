@@ -156,7 +156,7 @@ Feature: Regression testing
     When User will login to the application as "nekrashevicha2" user
     And Logged in user changes the user to "Plante,Faith"
     And User will click on search in dashboard
-    And User selects "Current IDP Status" as "Under Co-Primary (and/or) Additional Mentor's Review"
+    And User selects "Current IDP Status" as "Under Trainee's Meeting Verification"
     And User clicks on search button
     And User click on "Revise Existing IDP" on the grid
     And User clicks on yes button in pop up

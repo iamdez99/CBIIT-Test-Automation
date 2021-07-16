@@ -30,8 +30,14 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	/**
 	 * @Satya1Ticket88 Scenario: verify vacancy description without copy/paste
 	 */
-	@When("User should see Vacancy Dashboard Page")
+	@When("User should see Vacancy Manager Home Page")
 	public void user_should_see_Vacancy_Dashboard_Page() throws TestingException {
+		vacancyManagerUserStepsImpl.verifyHomePageHeader();
+	}
+
+	@Given("User clicks on vacancy dashboard tab")
+	public void user_views_list_of_vacancies_on_vacancy_dashboard() throws TestingException {
+		CommonUtils.click(vacancyManagerUserPage.vacanciesDashboardTab);
 		vacancyManagerUserStepsImpl.verifyVacancyDashboardHeader();
 	}
 
@@ -61,27 +67,12 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	 * @Satya3Ticket89 Scenario: Verify Letters of Recommendation persistent in
 	 *                 Basic Information
 	 */
-	@When("User selects recommendation as {int}")
-	public void user_selects_recommendation_as(Integer int1) {
-		vacancyManagerUserStepsImpl.selectRecommendationLetter();
-		MiscUtils.sleep(2000);
-	}
+	@Then("User selects recommendation as {int}")
+	public void user_selects_recommendation_as(int num) {
+		vacancyManagerUserStepsImpl.selectNumRecomendationLetters(num);
+		MiscUtils.sleep(3000);
+		CucumberLogUtils.logScreenShot();
 
-	@When("User clicks Save button")
-	public void user_clicks_Save_button() {
-		CommonUtils.click(vacancyManagerUserPage.basicVacancyInformationSaveButton);
-		MiscUtils.sleep(2000);
-		CommonUtils.click(vacancyManagerUserPage.basicVacancyInformationSaveButton);
-		MiscUtils.sleep(2000);
-		CommonUtils.click(vacancyManagerUserPage.basicVacancyInformationSaveButton);
-		JavascriptUtils.scrollDown(7000);
-		CommonUtils.click(vacancyManagerUserPage.basicVacancyInformationSaveButton);
-	}
-
-	@Then("User can verify the recommendation value showing as {int} on Review and Finalize page")
-	public void user_can_verify_the_recommendation_value_showing_as_on_Review_and_Finalize_page(Integer int1) {
-		vacancyManagerUserStepsImpl.verifyNumberOfLettersOfRecommendation();
-		MiscUtils.sleep(2000);
 	}
 
 	/**
@@ -109,8 +100,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	@Then("User should able to navigate to the {string} without any error")
 	public void user_should_able_to_navigate_to_the_without_any_error(String nameOfSection) {
 		CommonUtils.click(vacancyManagerUserPage.basicVacancySection);
-		// Assert.assertEquals(nameOfSection,
-		// vacancyManagerUserPage.vacancyDashboardPageHeader.getText());
+
 	}
 
 	/**
@@ -161,27 +151,24 @@ public class VacancyManagerUserSteps extends PageInitializer {
 
 	}
 
-	@Then("User can see the {string}, {string}, {string}, {string}, {string}, {string} sub filters on closed vacancies")
-	public void user_can_see_the_sub_filters_on_closed_vacancies(String allSubFilter, String closedSubFilter,
-			String triagedSubFilter, String individuallySubFilter, String scoredSubFilter, String archivedSubFilter) {
+	@Then("User can see the {string}, {string}, {string}, {string}, {string} sub filters on closed vacancies")
+	public void user_can_see_the_sub_filters_on_closed_vacancies(String allSubFilter, String triagedSubFilter,
+			String individuallyScoredSubFilter, String committeeReviewSubFilter, String votingCompleteSubFilter) {
 
-		Assert.assertTrue(vacancyManagerUserPage.allClosedSubFiltersTextpreFlightVacanciesTab.getText()
+		Assert.assertTrue(vacancyManagerUserPage.closedAllSubFiltersTextpreFlightVacanciesTab.getText()
 				.contentEquals(allSubFilter));
 		MiscUtils.sleep(1000);
-		Assert.assertTrue(vacancyManagerUserPage.closedClosedSubFiltersTextpreFlightVacanciesTab.getText()
-				.contentEquals(closedSubFilter));
-		MiscUtils.sleep(1000);
-		Assert.assertTrue(vacancyManagerUserPage.triagedClosedSubFiltersTextpreFlightVacanciesTab.getText()
+		Assert.assertTrue(vacancyManagerUserPage.closedTriagedSubFiltersTextpreFlightVacanciesTab.getText()
 				.contentEquals(triagedSubFilter));
 		MiscUtils.sleep(1000);
-		Assert.assertTrue(vacancyManagerUserPage.individuallyScoredClosedSubFiltersTextpreFlightVacanciesTab.getText()
-				.contentEquals(individuallySubFilter));
+		Assert.assertTrue(vacancyManagerUserPage.closedIndividuallyScoredSubFiltersTextpreFlightVacanciesTab.getText()
+				.contentEquals(individuallyScoredSubFilter));
 		MiscUtils.sleep(1000);
-		Assert.assertTrue(vacancyManagerUserPage.scoredClosedSubFiltersTextpreFlightVacanciesTab.getText()
-				.contentEquals(scoredSubFilter));
+		Assert.assertTrue(vacancyManagerUserPage.closedCommitteeReviewSubFiltersTextpreFlightVacanciesTab.getText()
+				.contentEquals(committeeReviewSubFilter));
 		MiscUtils.sleep(1000);
-		Assert.assertTrue(vacancyManagerUserPage.archivedClosedSubFiltersTextpreFlightVacanciesTab.getText()
-				.contentEquals(archivedSubFilter));
+		Assert.assertTrue(vacancyManagerUserPage.closedVotingCompleteSubFiltersTextpreFlightVacanciesTab.getText()
+				.contentEquals(votingCompleteSubFilter));
 		MiscUtils.sleep(1000);
 	}
 
@@ -221,8 +208,8 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	// openDate = index - 2
 	// close date: index 33 = 1
 	public void user_selects_date_same_as_today_s_date() {
-		// open date = 2021-06-07, close date = 2021-06-07
-		vacancyManagerUserStepsImpl.selectOpenCloseDate(9, 51);
+		// open date = 07/15/2021, close date = 07/15/2021
+		vacancyManagerUserStepsImpl.selectOpenCloseDate(18, 60);
 
 	}
 
@@ -237,7 +224,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	@When("User selects the Open date as greater than the Close date")
 	public void user_selects_the_Open_date_as_greater_than_the_Close_date() {
 		// open date = 2021-06-09
-		// close date = 2021-06-07
+		// close date = 2021-06-07 (30+(3*7))
 		vacancyManagerUserStepsImpl.selectOpenCloseDate(11, 51);
 
 	}
@@ -255,15 +242,19 @@ public class VacancyManagerUserSteps extends PageInitializer {
 
 	}
 
-	@Then("User can see {string},{string}, {string}, {string} toggle buttons")
+	@Then("User can verify {string},{string}, {string}, {string} toggle buttons")
 	public void user_can_see_toggle_buttons(String equalOpportunityEmployer, String standardsOfConduct,
 			String foreignEducation, String reasonableAccommodation) {
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.equalOpportunityEmployerInMandatorySection.getText()
 				.contentEquals(equalOpportunityEmployer));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.standardsOfConductFinancialDisclosureInMandatorySection.getText()
 				.contentEquals(standardsOfConduct));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(
 				vacancyManagerUserPage.foreignEducationInMandatorySection.getText().contentEquals(foreignEducation));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.reasonableAccommodationInMandatorySection.getText()
 				.contentEquals(reasonableAccommodation));
 
@@ -320,12 +311,15 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	@Then("User can see the below fields under Application Documents {string},{string}, {string}, {string}")
 	public void user_can_see_the_below_fields_under_Application_Documents(String curriculumVitae, String coverLetter,
 			String visionStatement, String qualificationStatement) {
-		JavascriptUtils.scrollDown(1000);
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(
 				vacancyManagerUserPage.curriculumVitaeField.getAttribute("value").contentEquals(curriculumVitae));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.coverLetterField.getAttribute("value").contentEquals(coverLetter));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(
 				vacancyManagerUserPage.visionStatementField.getAttribute("value").contentEquals(visionStatement));
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.qualificationStatementField.getAttribute("value")
 				.contentEquals(qualificationStatement));
 
@@ -342,7 +336,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		Assert.assertFalse(vacancyManagerUserPage.optionalCheckboxOfCurriculumVitae.isSelected());
 		Assert.assertTrue(vacancyManagerUserPage.optionalCheckboxOfCoverLetter.isSelected());
 		Assert.assertFalse(vacancyManagerUserPage.optionalCheckboxOfVisionStatement.isSelected());
-		Assert.assertTrue(vacancyManagerUserPage.optionalCheckboxOfQualificationStatement.isSelected());
+		Assert.assertFalse(vacancyManagerUserPage.optionalCheckboxOfQualificationStatement.isSelected());
 	}
 
 	@Then("User can see trash icon in each field to delete the field")
@@ -393,20 +387,17 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		CommonUtils.click(vacancyManagerUserPage.emailTamplatesSection);
 	}
 
-	@Given("User can see the below fields {string},{string},{string}, {string},{string}")
+	@Given("User can see the below fields {string},{string},{string}")
 	public void user_can_see_the_below_fields(String applicationSaved, String appliactionIsInactive,
-			String applicationSubmittedConfirmation, String notReferredToInterview, String invitationToInterview) {
+			String applicationSubmittedConfirmation) {
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.applicationSavedField.getText().contentEquals(applicationSaved));
 		Assert.assertTrue(
 				vacancyManagerUserPage.applicationIsInactiveField.getText().contentEquals(appliactionIsInactive));
 		Assert.assertTrue(vacancyManagerUserPage.applicationSubmittedConfirmationField.getText()
 				.contentEquals(applicationSubmittedConfirmation));
-		Assert.assertTrue(
-				vacancyManagerUserPage.notReferredToInterviewField.getText().contentEquals(notReferredToInterview));
-		Assert.assertTrue(
-				vacancyManagerUserPage.invitationToInterviewField.getText().contentEquals(invitationToInterview));
 
-	}
+}
 
 	@Given("User toggles off\\/on Application saved checkbox to mark the template as active or not")
 	public void user_toggles_off_on_Application_saved_checkbox_to_mark_the_template_as_active_or_not() {
@@ -437,6 +428,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 
 	@Then("User can see the updated changes displaying as same")
 	public void user_can_see_the_updated_changes_displaying_as_same() {
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.applicationSavedTextField.getText().contains("Lorem Ipsum"));
 	}
 
@@ -468,7 +460,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		MiscUtils.sleep(1000);
 		CommonUtils.click(vacancyManagerUserPage.committeeMemberDropdown);
 		MiscUtils.sleep(1000);
-		CommonUtils.click(vacancyManagerUserPage.apptrackScoringMember);
+		CommonUtils.click(vacancyManagerUserPage.connorScoringMember);
 		MiscUtils.sleep(1000);
 		CommonUtils.click(vacancyManagerUserPage.roleDropdown);
 		MiscUtils.sleep(1000);
@@ -540,62 +532,55 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	public void user_clicks_on_Review_and_Finalize_tab() {
 		CommonUtils.click(vacancyManagerUserPage.reviewSection);
 	}
-
-	@Then("User can see confirmation modal {string} is displayed")
-	public void user_can_see_confirmation_modal_is_displayed(String expectedTextfromAlert) {
-		Assert.assertTrue(CommonUtils.getAlertText().contentEquals(expectedTextfromAlert));
-
+    
+	@Then("User can see confirmation modal appear")
+	public void user_can_see_confirmation_modal_appear() {
+		Assert.assertTrue(vacancyManagerUserPage.readyToFinalizeMessage.isDisplayed());
 	}
-    //@Satya18Ticket120
+
+	// @Satya18Ticket120
 	@Then("User adds committee member as {string} and role {string}")
 	public void user_adds_committee_member_as_and_role(String committeeMember, String role) {
 		vacancyManagerUserStepsImpl.selectCommitteeMemberFromDropDown(committeeMember);
 		vacancyManagerUserStepsImpl.selectRole(role);
-		}
-	
+	}
+
 	@Then("User picks open date as {string} and close date as {string}")
 	public void user_picks_open_date_as_and_close_date_as(String openDate, String closeDate) {
-		JavascriptUtils.scrollIntoView(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
-		JavascriptUtils.clickByJS(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
-		MiscUtils.sleep(2000);
-		JavascriptUtils.clickByJS(vacancyManagerUserPage.calendarDatePicker.get(16));
-		MiscUtils.sleep(2000);
-		JavascriptUtils.clickByJS(vacancyManagerUserPage.closeCalendarInputButtonInBasicVacancySection);
-		MiscUtils.sleep(2000);
-		JavascriptUtils.clickByJS(vacancyManagerUserPage.calendarDatePicker.get(65));
-		MiscUtils.sleep(2000);
-		
+		vacancyManagerUserStepsImpl.selectOpenCloseDate(25, 69);
+
 	}
 
-	@When("User chooses OK for  confirmation modal{string}")
+	@When("User chooses OK for confirmation modal{string}")
 	public void user_chooses_OK_for_confirmation_modal(String string) {
-	    
+		CommonUtils.click(vacancyManagerUserPage.reviewOKbutton);
+
 	}
 
-	@Then("User can see confirmation modal {string}")
-	public void user_can_see_confirmation_modal(String string) {
-	   
+	@Then("User can see confirmation modal Vacancy Finalized!")
+	public void user_can_see_confirmation_modal_Vacancy_Finalized() {
+		Assert.assertTrue(vacancyManagerUserPage.vacancyFinalizedMessage.isDisplayed());
+		CommonUtils.click(vacancyManagerUserPage.closeAlertMessage);
 	}
 
 	// @Satya7Ticket94
 	@When("User picks open date and close date")
 	public void user_picks_open_date_and_close_date() {
-		//JavascriptUtils.scrollIntoView(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
-		//JavascriptUtils.clickByJS(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
-		//JavascriptUtils.clickByJS(vacancyManagerUserPage.calendarDatePicker.get(13));
-		//JavascriptUtils.clickByJS(vacancyManagerUserPage.closeCalendarInputButtonInBasicVacancySection);
-		//JavascriptUtils.clickByJS(vacancyManagerUserPage.calendarDatePicker.get(63));
-		//MiscUtils.sleep(2000);
-		vacancyManagerUserStepsImpl.selectOpenCloseDate(13,63);
+		//JavascriptUtils.scrollDown(600);
+		vacancyManagerUserStepsImpl.selectOpenCloseDate(25, 69);
+		MiscUtils.sleep(5000);
+		//open date index 26 -1 =25 HOW TO FIND IN HTML xpath = (//div[@class='ant-picker-cell-inner'])[26] DATE 07/22/2021
+		//close date index 70 -1=68 HOW TO FIND IN HTML xpath =(//div[@class='ant-picker-cell-inner'])[70] DATE 07/24/2021
 	}
 
 	@Then("User can see the selected Open & Closed date displaying as the same")
 	public void user_can_see_the_selected_Open_Closed_date_displaying_as_the_same() {
-		// text = 10,17
 		JavascriptUtils.scrollIntoView(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
-		Assert.assertTrue(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection.getAttribute("title").contentEquals("2021-06-12"));
-		Assert.assertTrue(vacancyManagerUserPage.closeCalendarInputButtonInBasicVacancySection.getAttribute("title").contentEquals("2021-06-20"));
-		
+		Assert.assertTrue(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection.getAttribute("title")
+				.contentEquals("07/22/2021"));
+		MiscUtils.sleep(3000); 
+		Assert.assertTrue(vacancyManagerUserPage.closeCalendarInputButtonInBasicVacancySection.getAttribute("title")
+				.contentEquals("07/24/2021"));
 
 	}
 
