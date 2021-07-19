@@ -531,6 +531,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	@Then("User clicks on Review and Finalize tab")
 	public void user_clicks_on_Review_and_Finalize_tab() {
 		CommonUtils.click(vacancyManagerUserPage.reviewSection);
+		JavascriptUtils.scrollUp(600);
 	}
     
 	@Then("User can see confirmation modal appear")

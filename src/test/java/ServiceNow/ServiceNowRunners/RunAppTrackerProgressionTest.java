@@ -15,6 +15,7 @@ import cucumber.api.junit.Cucumber;
     	, dryRun =false
 		, monochrome=false
 		, strict =true
+		
 		)
 
 public class RunAppTrackerProgressionTest {
