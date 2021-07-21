@@ -29,9 +29,6 @@ And User enters the vacancy title
 Then User selects recommendation as 2 
 
 
-
-
-
 @Ticket91
 Scenario: Verify create vacancy form
 And User should see Vacancy Manager Home Page
@@ -157,7 +154,8 @@ And User clicks on Vacancy Committee tab
 When User clicks on the Email template tab
 Then User can see the updated changes displaying as same
 
-@Satya16Ticket119
+
+@Satya15Ticket119
 Scenario: Verify Vacancy Committee form
 And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
@@ -169,39 +167,24 @@ When User can see Member & Role dropdown list
 Then User can see Save & Cancel button in Action column
 
 @Satya16Ticket119
-Scenario: Verify add member functionality
-Given User logged in to the application with vacancy manager user role
+Scenario: Verify add/cancel/edit member functionality
+And User clicks on vacancy dashboard tab
 When User clicks on Create Vacancy button
-When User click on Vacancy Committee tab
-Then User can see the Vacancy Committee table and add member button
-When User click on the add member button
-Then User can see Member & Role dropdown list
+And User enters the vacancy title
+And User clicks on Vacancy Committee tab
+And User clicks on the add member button
+Then User can  pull up NIH username from the VMS User Table by typing "Bob Barber"
+And User assigns "Member (voting)" role to Bob Barber
 And User can see Save & Cancel button in Action column
-When User click on member drop down
-Then User can see the list of member name & email id
-And User selects a member from the list
-When User click on Role dropdown
-Then User can see the below options
-And Chair Member (voting) Member (non-voting) HR Specialist EDI Representative Executive Secretary
-When User click on Cancel button
-Then User can see the member is not added to the grid
-When User click on Save button
-Then User can see the member is added to the grid
+And User can cancel that Chair member by clickng Cancel button
+And User adds committee member as "Connor Scoring" and role "Executive Secretary"
+Then User can verify that committee member name and role are displayed
+And User adds committee member as "Abdullah Sharif" and role "Chair"
+And User edits role and name of Abdullah Sharif as "APPTRACK VACANCY MANAGER"
+And User removes "Abdullah Sharif"
 
-@Satya16Ticket119
-Scenario: Verify edit member functionality
-Given User logged in to the application with vacancy manager user role
-When User clicks on Create Vacancy button
-When User click on Vacancy Committee tab
-Then User can see the Vacancy Committee table and add member button
-When User click on edit button
-Then User can modify the Name & Role
-When User click on Cancel button
-Then User can verify the data not updated
-When User click on Save button
-Then User can verify the data updated
-When User click on remove button
-Then User can verify the data removed from grid
+
+
 
 #unfinished
 @Satya17Ticket120

@@ -401,6 +401,39 @@ public class VacancyManagerUserPage extends CommonUtils {
 	@FindBy(xpath ="//button[@class='ant-btn ant-btn-primary ant-btn-background-ghost']/span")
 	public WebElement closeAlertMessage;
 	
+	/**Vacancy Committee Tab **/
+	@FindBy(xpath ="//div[@class='StepContent']//h3[contains(text(), 'Vacancy Committee')]")
+	public WebElement vacancyCommitteeTitle;
+	
+	/**Vacancy Committee Tab **/
+	@FindBy(xpath ="//button[@class='ant-btn ant-btn-link ActionButton']//span [contains(text(), 'cancel')]")
+	public WebElement cancelButtonAddingMember;
+	
+	/**Committee Member Bob Barber **/
+	@FindBy(xpath ="//*[contains (text(), 'Bob Barber')]")
+	public WebElement memberBobBarber;
+	
+	/**Committee Member input box **/
+	@FindBy(xpath ="//div[@class=' css-1hwfws3']//input")
+	public WebElement inputBoxCommitteeMember;
+	
+	/**Connor Scoring edit button **/
+	@FindBy(xpath ="(//span[@class='anticon anticon-edit'])[2]")
+	public WebElement editAbdullahSharif;
+	
+	/** Remove button Abdullah Sharif' **/
+	@FindBy(xpath ="(//button[@class='ant-btn ant-btn-text ActionButton']//span[contains(text(), 'remove')])[2]")
+	public WebElement removeButtonAbdullahSharif;
+	
+	
+	/** Text Box Committee Member Connor Scoring**/
+	@FindBy(xpath ="//div[@class='editable-cell-value-wrap']//div")
+	public WebElement textBoxComMemberConnorScoring;
+	
+	
+	/** Text Box Connor Scoring**/
+	@FindBy(xpath ="(//div[@class='editable-cell-value-wrap'])[2]")
+	public WebElement textBoxRoleConnorScoring;		
 	
 	
 	public VacancyManagerUserPage() {

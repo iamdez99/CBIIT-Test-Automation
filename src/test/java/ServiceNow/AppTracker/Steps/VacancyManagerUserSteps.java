@@ -397,7 +397,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		Assert.assertTrue(vacancyManagerUserPage.applicationSubmittedConfirmationField.getText()
 				.contentEquals(applicationSubmittedConfirmation));
 
-}
+	}
 
 	@Given("User toggles off\\/on Application saved checkbox to mark the template as active or not")
 	public void user_toggles_off_on_Application_saved_checkbox_to_mark_the_template_as_active_or_not() {
@@ -533,7 +533,7 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		CommonUtils.click(vacancyManagerUserPage.reviewSection);
 		JavascriptUtils.scrollUp(600);
 	}
-    
+
 	@Then("User can see confirmation modal appear")
 	public void user_can_see_confirmation_modal_appear() {
 		Assert.assertTrue(vacancyManagerUserPage.readyToFinalizeMessage.isDisplayed());
@@ -567,11 +567,13 @@ public class VacancyManagerUserSteps extends PageInitializer {
 	// @Satya7Ticket94
 	@When("User picks open date and close date")
 	public void user_picks_open_date_and_close_date() {
-		//JavascriptUtils.scrollDown(600);
+		// JavascriptUtils.scrollDown(600);
 		vacancyManagerUserStepsImpl.selectOpenCloseDate(25, 69);
 		MiscUtils.sleep(5000);
-		//open date index 26 -1 =25 HOW TO FIND IN HTML xpath = (//div[@class='ant-picker-cell-inner'])[26] DATE 07/22/2021
-		//close date index 70 -1=68 HOW TO FIND IN HTML xpath =(//div[@class='ant-picker-cell-inner'])[70] DATE 07/24/2021
+		// open date index 26 -1 =25 HOW TO FIND IN HTML xpath =
+		// (//div[@class='ant-picker-cell-inner'])[26] DATE 07/22/2021
+		// close date index 70 -1=68 HOW TO FIND IN HTML xpath
+		// =(//div[@class='ant-picker-cell-inner'])[70] DATE 07/24/2021
 	}
 
 	@Then("User can see the selected Open & Closed date displaying as the same")
@@ -579,9 +581,86 @@ public class VacancyManagerUserSteps extends PageInitializer {
 		JavascriptUtils.scrollIntoView(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection);
 		Assert.assertTrue(vacancyManagerUserPage.openCalendarInputButtonInBasicVacancySection.getAttribute("title")
 				.contentEquals("07/22/2021"));
-		MiscUtils.sleep(3000); 
+		MiscUtils.sleep(3000);
 		Assert.assertTrue(vacancyManagerUserPage.closeCalendarInputButtonInBasicVacancySection.getAttribute("title")
 				.contentEquals("07/24/2021"));
+
+	}
+
+	@When("User can see the Vacancy Committee table and add member button")
+	public void user_can_see_the_Vacancy_Committee_table_and_add_member_button() {
+		MiscUtils.sleep(1000);
+		Assert.assertEquals(vacancyManagerUserPage.vacancyCommitteeTitle.getText(), "Vacancy Committee");
+		MiscUtils.sleep(1000);
+		Assert.assertTrue(vacancyManagerUserPage.addMemberButton.isDisplayed());
+
+	}
+
+	@When("User clicks on the add member button")
+	public void user_clicks_on_the_add_member_button() {
+		CommonUtils.click(vacancyManagerUserPage.addMemberButton);
+	}
+
+	@When("User can see Member & Role dropdown list")
+	public void user_can_see_Member_Role_dropdown_list() {
+		MiscUtils.sleep(1000);
+		Assert.assertTrue(vacancyManagerUserPage.committeeMemberDropdown.isDisplayed());
+		MiscUtils.sleep(1000);
+		Assert.assertTrue(vacancyManagerUserPage.roleDropdown.isDisplayed());
+		MiscUtils.sleep(1000);
+
+	}
+
+	@Then("User can see Save & Cancel button in Action column")
+	public void user_can_see_Save_Cancel_button_in_Action_column() {
+		Assert.assertTrue(vacancyManagerUserPage.saveButtonAddingMember.isDisplayed());
+		MiscUtils.sleep(1000);
+		Assert.assertTrue(vacancyManagerUserPage.cancelButtonAddingMember.isDisplayed());
+	}
+
+	@Then("User can  pull up NIH username from the VMS User Table by typing {string}")
+	public void user_can_pull_up_NIH_username_from_the_VMS_User_Table_by_typing(String str) {
+		CommonUtils.sendKeys(vacancyManagerUserPage.inputBoxCommitteeMember, str);
+		MiscUtils.sleep(3000);
+		vacancyManagerUserPage.inputBoxCommitteeMember.sendKeys(Keys.ENTER);
+		MiscUtils.sleep(3000);
+
+	}
+
+	@Then("User assigns {string} role to Bob Barber")
+	public void user_assigns_role_to_Bob_Barber(String role) {
+		CommonUtils.click(vacancyManagerUserPage.roleDropdown);
+		CommonUtils.click(vacancyManagerUserPage.roleMemberVoting);
+		MiscUtils.sleep(1000);
+	}
+
+	@Then("User can verify that committee member name and role are displayed")
+	public void user_can_verify_that_committee_member_name_and_role_are_displayed() {
+		Assert.assertTrue(vacancyManagerUserPage.textBoxComMemberConnorScoring.getText().contains("Connor Scoring"));
+		MiscUtils.sleep(2000);
+		Assert.assertTrue(vacancyManagerUserPage.textBoxRoleConnorScoring.getText().contains("Executive Secretary"));
+	}
+
+	@Then("User can cancel that Chair member by clickng Cancel button")
+	public void user_can_cancel_that_Chair_member_by_clickng_Cancel_button() {
+		CommonUtils.click(vacancyManagerUserPage.cancelButtonAddingMember);
+		MiscUtils.sleep(1000);
+	}
+
+	@Then("User edits role and name of Abdullah Sharif as {string}")
+	public void user_edits_role_and_name_of_Abdullah_Sharif_as(String str) {
+		CommonUtils.click(vacancyManagerUserPage.editAbdullahSharif);
+		CommonUtils.sendKeys(vacancyManagerUserPage.inputBoxCommitteeMember, str);
+		MiscUtils.sleep(3000);
+		vacancyManagerUserPage.inputBoxCommitteeMember.sendKeys(Keys.ENTER);
+		MiscUtils.sleep(3000);
+		CommonUtils.click(vacancyManagerUserPage.saveButtonAddingMember);
+
+	}
+
+	@Then("User removes {string}")
+	public void user_removes(String string) {
+		CommonUtils.click(vacancyManagerUserPage.removeButtonAbdullahSharif);
 
 	}
 
